@@ -23,6 +23,7 @@ export default {
   },
   methods: {
     loadEditor() {
+      /* global unlayer */
       unlayer.init({
         id: 'editor',
         projectId: this.projectId,
@@ -43,7 +44,6 @@ export default {
 #editor {
   flex: 1;
   display: flex;
-
 }
 
 #editor > iframe {

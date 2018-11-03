@@ -1,10 +1,11 @@
 {
   "name": "vue-email-editor",
   "version": "0.1.0",
-  "private": true,
+  "main": "./dist/vue-email-editor.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target lib --name vue-email-editor ./src/components/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -16,6 +17,13 @@
     "@vue/cli-service": "^3.0.5",
     "vue-template-compiler": "^2.5.17"
   },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "eslintConfig": {
     "root": true,
     "env": {
