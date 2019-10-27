@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div id="editor"></div>
+    <div id="editor" v-bind:style="{ minHeight: minHeight }"></div>
   </div>
 </template>
 
@@ -8,7 +8,15 @@
 export default {
   name: 'EmailEditor',
   props: {
+    options: Object,
     projectId: Number,
+    tools: Object,
+    appearance: Object,
+    locale: String,
+    minHeight: {
+      type: String,
+      default: '500px',
+    },
   },
   created() {
     const unlayerScript = document.createElement('script');
@@ -22,10 +30,28 @@ export default {
   },
   methods: {
     loadEditor() {
+      const options = this.options || {};
+
+      if (this.projectId) {
+        options.projectId = this.projectId
+      }
+
+      if (this.tools) {
+        options.tools = this.tools
+      }
+      
+      if (this.appearance) {
+        options.appearance = this.appearance
+      }
+
+      if (this.locale) {
+        options.locale = this.locale
+      }
+
       /* global unlayer */
       unlayer.init({
+        ...options,
         id: 'editor',
-        projectId: this.projectId,
         displayMode: 'email',
       });
 
@@ -53,14 +79,5 @@ export default {
 #editor {
   flex: 1;
   display: flex;
-}
-
-#editor > iframe {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  min-height: 500px !important;
-  display: flex;
-  border: 0px;
 }
 </style>

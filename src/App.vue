@@ -8,7 +8,7 @@
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
 
-      <EmailEditor ref="editor" :projectId="1" v-on:load="editorLoaded" />
+      <EmailEditor ref="editor" v-on:load="editorLoaded" />
     </div>
   </div>
 </template>
