@@ -9,7 +9,6 @@ export default {
   name: 'EmailEditor',
   props: {
     projectId: Number,
-    templateId: Number,
   },
   created() {
     const unlayerScript = document.createElement('script');
@@ -27,10 +26,20 @@ export default {
       unlayer.init({
         id: 'editor',
         projectId: this.projectId,
-        templateId: this.templateId,
         displayMode: 'email',
       });
+
+      this.$emit('load');
     },
+    loadDesign(design) {
+      unlayer.loadDesign(design);
+    },
+    saveDesign(callback) {
+      unlayer.saveDesign(callback);
+    },
+    exportHtml(callback) {
+      unlayer.exportHtml(callback);
+    }
   },
 }
 </script>
