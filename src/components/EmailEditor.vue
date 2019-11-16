@@ -1,7 +1,5 @@
 <template>
-  <div class="wrapper">
-    <div id="editor" v-bind:style="{ minHeight: minHeight }"></div>
-  </div>
+  <div id="editor" v-bind:style="{ minHeight: minHeight }"></div>
 </template>
 
 <script>
@@ -71,11 +69,6 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  flex: 1;
-  display: flex;
-}
-
 #editor {
   flex: 1;
   display: flex;
