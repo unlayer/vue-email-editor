@@ -18,7 +18,7 @@ export default {
   },
   created() {
     const unlayerScript = document.createElement('script');
-    unlayerScript.setAttribute('src', '//editor.unlayer.com/embed.js');
+    unlayerScript.setAttribute('src', '//editor.unlayer.com/embed.js?2');
     unlayerScript.onload = () => {
       this.loadEditor();
     };
@@ -47,7 +47,7 @@ export default {
       }
 
       /* global unlayer */
-      unlayer.init({
+      this.editor = unlayer.createEditor({
         ...options,
         id: 'editor',
         displayMode: 'email',
@@ -56,13 +56,13 @@ export default {
       this.$emit('load');
     },
     loadDesign(design) {
-      unlayer.loadDesign(design);
+      this.editor.loadDesign(design);
     },
     saveDesign(callback) {
-      unlayer.saveDesign(callback);
+      this.editor.saveDesign(callback);
     },
     exportHtml(callback) {
-      unlayer.exportHtml(callback);
+      this.editor.exportHtml(callback);
     }
   },
 }
