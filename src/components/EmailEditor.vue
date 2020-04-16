@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { loadScript } from './loadScript';
+
 export default {
   name: 'EmailEditor',
   props: {
@@ -17,26 +19,7 @@ export default {
     },
   },
   created() {
-    const embedJs = "//editor.unlayer.com/embed.js?2"
-    const scripts = document.querySelectorAll('script');
-    let scriptLoaded = false
-
-    scripts.forEach(script => {
-      if (script.src.includes(embedJs)) {
-        scriptLoaded = true
-      }
-    })
-
-    if (!scriptLoaded) {
-      const unlayerScript = document.createElement('script');
-      unlayerScript.setAttribute('src', embedJs);
-      unlayerScript.onload = () => {
-        this.loadEditor();
-      };
-      document.head.appendChild(unlayerScript);
-    } else {
-      this.loadEditor();
-    }
+    loadScript(this.loadEditor);
   },
   mounted() {
   },
