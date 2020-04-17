@@ -19,7 +19,7 @@ export default {
     },
   },
   created() {
-    loadScript(this.loadEditor);
+    loadScript(this.loadEditor.bind(this));
   },
   mounted() {
   },
