@@ -1,9 +1,11 @@
 <template>
-  <div id="editor" v-bind:style="{ minHeight: minHeight }"></div>
+  <div v-bind:id="editorId" class="unlayer-editor" v-bind:style="{ minHeight: minHeight }"></div>
 </template>
 
 <script>
 import { loadScript } from './loadScript';
+
+let lastEditorId = 0;
 
 export default {
   name: 'EmailEditor',
@@ -17,6 +19,11 @@ export default {
       type: String,
       default: '500px',
     },
+  },
+  computed: {
+    editorId() {
+      return `editor-${++lastEditorId}`;
+    }
   },
   created() {
     loadScript(this.loadEditor.bind(this));
@@ -46,7 +53,7 @@ export default {
       /* global unlayer */
       this.editor = unlayer.createEditor({
         ...options,
-        id: 'editor',
+        id: this.editorId,
         displayMode: 'email',
       });
 
@@ -66,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-#editor {
+.unlayer-editor {
   flex: 1;
   display: flex;
 }
