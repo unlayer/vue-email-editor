@@ -4,6 +4,7 @@
 
 <script>
 import { loadScript } from './loadScript';
+import pkg from '../../package.json';
 
 let lastEditorId = 0;
 
@@ -55,6 +56,10 @@ export default {
         ...options,
         id: this.editorId,
         displayMode: 'email',
+        source: {
+          name: pkg.name,
+          version: pkg.version,
+        },
       });
 
       this.$emit('load');
