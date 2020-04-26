@@ -85,6 +85,8 @@ Next, you'll need to import the Email Editor component to your app.
 | **saveDesign**  | `Function callback`      | Returns the design JSON in a callback function                 |
 | **exportHtml**  | `Function callback`      | Returns the design HTML and JSON in a callback function        |
 
+See the [example source](https://github.com/unlayer/vue-email-editor/tree/master/src) for a reference implementation.
+
 ### Properties
 
 * `minHeight` `String` minimum height to initialize the editor with (default 500px)
@@ -95,8 +97,6 @@ Next, you'll need to import the Email Editor component to your app.
 * `locale` `String` translations string (default en-US)
 
 See the [Unlayer Docs](https://docs.unlayer.com/) for all available options.
-
-See the [example source](https://github.com/unlayer/vue-email-editor/tree/master/src) for a reference implementation.
 
 ## Custom Tools
 
