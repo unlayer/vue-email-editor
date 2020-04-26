@@ -57,7 +57,7 @@ Next, you'll need to import the Email Editor component to your app.
     },
     methods: {
       editorLoaded() {
-        this.$refs.editor.loadDesign(sample);
+        this.$refs.editor.loadDesign({});
       },
       saveDesign() {
         this.$refs.editor.saveDesign(
