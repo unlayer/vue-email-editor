@@ -1,6 +1,6 @@
 {
   "name": "vue-email-editor",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "./dist/vue-email-editor.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",

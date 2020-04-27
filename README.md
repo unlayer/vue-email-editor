@@ -48,7 +48,7 @@ Next, you'll need to import the Email Editor component to your app.
 </template>
 
 <script>
-  import EmailEditor from 'vue-email-editor'
+  import { EmailEditor } from 'vue-email-editor'
   
   export default {
     name: 'app',
