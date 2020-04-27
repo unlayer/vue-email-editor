@@ -1,12 +1,13 @@
 {
   "name": "vue-email-editor",
-  "version": "0.3.0",
+  "version": "0.6.0",
   "main": "./dist/vue-email-editor.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-bundle": "vue-cli-service build --target lib --name vue-email-editor ./src/components/index.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "release": "npm run build-bundle && npm publish"
   },
   "dependencies": {
     "vue": "^2.5.17"
