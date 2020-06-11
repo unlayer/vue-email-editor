@@ -1,9 +1,10 @@
 <template>
-  <div id="app">
+  <div id="designEdit">
     <div class="container">
       <div id="bar">
         <h1>Vue Email Editor (Demo)</h1>
 
+        <router-link to="/dashboard">Dashboard</router-link>
         <button v-on:click="saveDesign">Save Design</button>
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
@@ -14,17 +15,15 @@
 </template>
 
 <script>
-import { EmailEditor } from './components'
-import sample from './sample.json';
+import { EmailEditor } from '../components'
 
 export default {
-  name: 'app',
+  name: 'designEdit',
   components: {
     EmailEditor
   },
   methods: {
     editorLoaded() {
-      this.$refs.editor.loadDesign(sample);
     },
     saveDesign() {
       this.$refs.editor.saveDesign(
@@ -52,11 +51,11 @@ html, body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-#app {
+#app, #designEdit {
   height: 100%;
 }
 
-#app .container {
+#designEdit .container {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -89,5 +88,19 @@ html, body {
   border: 0px;
   max-width: 150px;
   cursor: pointer;
+}
+
+#bar a {
+  flex: 1;
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  border: 0px;
+  cursor: pointer;
+  text-align: right;
+  text-decoration: none;
+  line-height: 160%;
 }
 </style>
