@@ -27,9 +27,9 @@ export default {
     }
   },
   created() {
-    loadScript(this.loadEditor.bind(this));
   },
   mounted() {
+    loadScript(this.loadEditor.bind(this));
   },
   methods: {
     loadEditor() {
