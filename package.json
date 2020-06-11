@@ -16,6 +16,7 @@
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
+    "vue-router": "^3.3.2",
     "vue-template-compiler": "^2.5.17"
   },
   "files": [
