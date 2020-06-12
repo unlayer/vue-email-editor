@@ -8,7 +8,7 @@
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
 
-      <EmailEditor ref="editor" v-on:load="editorLoaded" />
+      <EmailEditor ref="emailEditor" v-on:load="editorLoaded" />
     </div>
   </div>
 </template>
@@ -24,17 +24,17 @@ export default {
   },
   methods: {
     editorLoaded() {
-      this.$refs.editor.loadDesign(sample);
+      this.$refs.emailEditor.editor.loadDesign(sample);
     },
     saveDesign() {
-      this.$refs.editor.saveDesign(
+      this.$refs.emailEditor.editor.saveDesign(
         (design) => {
           console.log('saveDesign', design);
         }
       )
     },
     exportHtml() {
-      this.$refs.editor.exportHtml(
+      this.$refs.emailEditor.editor.exportHtml(
         (data) => {
           console.log('exportHtml', data);
         }
