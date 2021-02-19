@@ -99,6 +99,89 @@ See the [example source](https://github.com/unlayer/vue-email-editor/tree/master
 
 See the [Unlayer Docs](https://docs.unlayer.com/) for all available options.
 
+Here's an example using the above properties...
+
+**App.vue** 
+```html
+<template>
+  <div id="app">
+    <div class="container">
+      <div id="bar">
+        <h1>Vue Email Editor (Demo)</h1>
+
+        <button v-on:click="saveDesign">Save Design</button>
+        <button v-on:click="exportHtml">Export HTML</button>
+      </div>
+
+      <EmailEditor
+        :appearance="appearance"
+        :min-height="minHeight"
+        :project-id="projectId"
+        :locale="locale"
+        :tools="tools"
+        :options="options"
+        ref="emailEditor"
+        v-on:load="editorLoaded"
+      />
+
+    </div>
+  </div>
+</template>
+
+<script>
+  import { EmailEditor } from 'vue-email-editor'
+  
+  export default {
+    name: 'app',
+    components: {
+      EmailEditor
+    },
+    data() {    
+      return {  
+        minHeight: "1000px",
+        locale: "en",
+        projectId: 0, // replace with your project id
+        tools: {
+          // disable image tool
+          image: {
+            enabled: false
+          }
+        },
+        options: {},
+        appearance: {
+          theme: 'dark',
+          panels: {
+            tools: {
+              dock: 'right'
+            }
+          }
+        } 
+      }
+    },
+    methods: {
+      editorLoaded() {
+        // Pass your template JSON here
+        // this.$refs.emailEditor.editor.loadDesign({});
+      },
+      saveDesign() {
+        this.$refs.emailEditor.editor.saveDesign(
+          (design) => {
+            console.log('saveDesign', design);
+          }
+        )
+      },
+      exportHtml() {
+        this.$refs.emailEditor.editor.exportHtml(
+          (data) => {
+            console.log('exportHtml', data);
+          }
+        )
+      }
+    }
+  }
+</script>
+```
+
 ## Custom Tools
 
 Custom tools can help you add your own content blocks to the editor. Every application is different and needs different tools to reach it's full potential. [Learn More](https://docs.unlayer.com/docs/custom-tools)
