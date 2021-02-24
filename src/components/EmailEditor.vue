@@ -16,6 +16,11 @@ export default {
     tools: Object,
     appearance: Object,
     locale: String,
+    displayMode:{
+      type: String,
+      required: false,
+      default: "email"
+    },
     minHeight: {
       type: String,
       default: '500px',
@@ -55,7 +60,7 @@ export default {
       this.editor = unlayer.createEditor({
         ...options,
         id: this.editorId,
-        displayMode: 'email',
+        displayMode: this.displayMode,
         source: {
           name: pkg.name,
           version: pkg.version,
