@@ -93,6 +93,7 @@ See the [example source](https://github.com/unlayer/vue-email-editor/tree/master
 - `appearance` `Object` configuration for appearance and theme (default {})
 - `projectId` `Integer` Unlayer project ID (optional)
 - `locale` `String` translations string (default en-US)
+- `displayMode` `String` configuration for display mode (`web` or `email`) (default `email`)
 
 See the [Unlayer Docs](https://docs.unlayer.com/) for all available options.
 
