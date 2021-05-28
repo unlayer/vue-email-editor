@@ -113,7 +113,6 @@ Here's an example using the above properties...
       </div>
 
       <EmailEditor
-        :display-mode="web"
         :appearance="appearance"
         :min-height="minHeight"
         :project-id="projectId"
@@ -122,6 +121,7 @@ Here's an example using the above properties...
         :options="options"
         ref="emailEditor"
         v-on:load="editorLoaded"
+        display-mode="web"
       />
     </div>
   </div>
