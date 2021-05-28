@@ -1,11 +1,11 @@
 # Vue Email Editor
 
-The excellent drag-n-drop email editor by [Unlayer](https://unlayer.com/embed) as a [Vue](https://vuejs.org/) *wrapper component*. This is the most powerful and developer friendly visual email builder for your app.
+The excellent drag-n-drop email editor by [Unlayer](https://unlayer.com/embed) as a [Vue](https://vuejs.org/) _wrapper component_. This is the most powerful and developer friendly visual email builder for your app.
 
-Video Overview |
-:---: |
-[![Vue Email Editor](https://unroll-assets.s3.amazonaws.com/unlayervideotour.png)](https://www.youtube.com/watch?v=MIWhX-NF3j8) |
-*Watch video overview: https://youtu.be/MIWhX-NF3j8* |
+|                                                         Video Overview                                                          |
+| :-----------------------------------------------------------------------------------------------------------------------------: |
+| [![Vue Email Editor](https://unroll-assets.s3.amazonaws.com/unlayervideotour.png)](https://www.youtube.com/watch?v=MIWhX-NF3j8) |
+|                                      _Watch video overview: https://youtu.be/MIWhX-NF3j8_                                       |
 
 ## Live Demo
 
@@ -48,12 +48,12 @@ Next, you'll need to import the Email Editor component to your app.
 </template>
 
 <script>
-  import { EmailEditor } from 'vue-email-editor'
-  
+  import { EmailEditor } from 'vue-email-editor';
+
   export default {
     name: 'app',
     components: {
-      EmailEditor
+      EmailEditor,
     },
     methods: {
       editorLoaded() {
@@ -61,47 +61,46 @@ Next, you'll need to import the Email Editor component to your app.
         // this.$refs.emailEditor.editor.loadDesign({});
       },
       saveDesign() {
-        this.$refs.emailEditor.editor.saveDesign(
-          (design) => {
-            console.log('saveDesign', design);
-          }
-        )
+        this.$refs.emailEditor.editor.saveDesign((design) => {
+          console.log('saveDesign', design);
+        });
       },
       exportHtml() {
-        this.$refs.emailEditor.editor.exportHtml(
-          (data) => {
-            console.log('exportHtml', data);
-          }
-        )
-      }
-    }
-  }
+        this.$refs.emailEditor.editor.exportHtml((data) => {
+          console.log('exportHtml', data);
+        });
+      },
+    },
+  };
 </script>
 ```
 
 ### Methods
-| method          | params                   | description                                                    |
-| --------------- | ------------------------ | -------------------------------------------------------------- |
-| **loadDesign**  | `Object data`            | Takes the design JSON and loads it in the editor               |
-| **saveDesign**  | `Function callback`      | Returns the design JSON in a callback function                 |
-| **exportHtml**  | `Function callback`      | Returns the design HTML and JSON in a callback function        |
+
+| method         | params              | description                                             |
+| -------------- | ------------------- | ------------------------------------------------------- |
+| **loadDesign** | `Object data`       | Takes the design JSON and loads it in the editor        |
+| **saveDesign** | `Function callback` | Returns the design JSON in a callback function          |
+| **exportHtml** | `Function callback` | Returns the design HTML and JSON in a callback function |
 
 See the [example source](https://github.com/unlayer/vue-email-editor/tree/master/src) for a reference implementation.
 
 ### Properties
 
-* `minHeight` `String` minimum height to initialize the editor with (default 500px)
-* `options` `Object` options passed to the Unlayer editor instance (default {})
-* `tools` `Object` configuration for the built-in and custom tools (default {})
-* `appearance` `Object` configuration for appearance and theme (default {})
-* `projectId` `Integer` Unlayer project ID (optional)
-* `locale` `String` translations string (default en-US)
+- `editorId` `String` HTML div id of the container where the editor will be embedded (optional)
+- `minHeight` `String` minimum height to initialize the editor with (default 500px)
+- `options` `Object` options passed to the Unlayer editor instance (default {})
+- `tools` `Object` configuration for the built-in and custom tools (default {})
+- `appearance` `Object` configuration for appearance and theme (default {})
+- `projectId` `Integer` Unlayer project ID (optional)
+- `locale` `String` translations string (default en-US)
 
 See the [Unlayer Docs](https://docs.unlayer.com/) for all available options.
 
 Here's an example using the above properties...
 
-**App.vue** 
+**App.vue**
+
 ```html
 <template>
   <div id="app">
@@ -123,40 +122,39 @@ Here's an example using the above properties...
         ref="emailEditor"
         v-on:load="editorLoaded"
       />
-
     </div>
   </div>
 </template>
 
 <script>
-  import { EmailEditor } from 'vue-email-editor'
-  
+  import { EmailEditor } from 'vue-email-editor';
+
   export default {
     name: 'app',
     components: {
-      EmailEditor
+      EmailEditor,
     },
-    data() {    
-      return {  
-        minHeight: "1000px",
-        locale: "en",
+    data() {
+      return {
+        minHeight: '1000px',
+        locale: 'en',
         projectId: 0, // replace with your project id
         tools: {
           // disable image tool
           image: {
-            enabled: false
-          }
+            enabled: false,
+          },
         },
         options: {},
         appearance: {
           theme: 'dark',
           panels: {
             tools: {
-              dock: 'right'
-            }
-          }
-        } 
-      }
+              dock: 'right',
+            },
+          },
+        },
+      };
     },
     methods: {
       editorLoaded() {
@@ -164,21 +162,17 @@ Here's an example using the above properties...
         // this.$refs.emailEditor.editor.loadDesign({});
       },
       saveDesign() {
-        this.$refs.emailEditor.editor.saveDesign(
-          (design) => {
-            console.log('saveDesign', design);
-          }
-        )
+        this.$refs.emailEditor.editor.saveDesign((design) => {
+          console.log('saveDesign', design);
+        });
       },
       exportHtml() {
-        this.$refs.emailEditor.editor.exportHtml(
-          (data) => {
-            console.log('exportHtml', data);
-          }
-        )
-      }
-    }
-  }
+        this.$refs.emailEditor.editor.exportHtml((data) => {
+          console.log('exportHtml', data);
+        });
+      },
+    },
+  };
 </script>
 ```
 
@@ -187,7 +181,6 @@ Here's an example using the above properties...
 Custom tools can help you add your own content blocks to the editor. Every application is different and needs different tools to reach it's full potential. [Learn More](https://docs.unlayer.com/docs/custom-tools)
 
 [![Custom Tools](https://unroll-assets.s3.amazonaws.com/custom_tools.png)](https://docs.unlayer.com/docs/custom-tools)
-
 
 ## Localization
 
