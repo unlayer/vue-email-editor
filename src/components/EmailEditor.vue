@@ -15,7 +15,11 @@ let lastEditorId = 0;
 export default {
   name: 'EmailEditor',
   props: {
-    displayMode: String,
+    displayMode: {
+      type: String,
+      required: false,
+      default: 'email',
+    },
     options: Object,
     projectId: Number,
     tools: Object,
@@ -38,7 +42,7 @@ export default {
   methods: {
     loadEditor() {
       const options = this.options || {};
-      const displayMode = this.displayMode || 'email';
+      const displayMode = this.displayMode;
 
       if (this.projectId) {
         options.projectId = this.projectId;
