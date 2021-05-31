@@ -1,5 +1,9 @@
 <template>
-  <div v-bind:id="editorId" class="unlayer-editor" v-bind:style="{ minHeight: minHeight }"></div>
+  <div
+    v-bind:id="editorId"
+    class="unlayer-editor"
+    v-bind:style="{ minHeight: minHeight }"
+  ></div>
 </template>
 
 <script>
@@ -11,6 +15,11 @@ let lastEditorId = 0;
 export default {
   name: 'EmailEditor',
   props: {
+    displayMode: {
+      type: String,
+      required: false,
+      default: 'email',
+    },
     options: Object,
     projectId: Number,
     tools: Object,
@@ -24,38 +33,38 @@ export default {
   computed: {
     editorId() {
       return `editor-${++lastEditorId}`;
-    }
+    },
   },
-  created() {
-  },
+  created() {},
   mounted() {
     loadScript(this.loadEditor.bind(this));
   },
   methods: {
     loadEditor() {
       const options = this.options || {};
+      const displayMode = this.displayMode;
 
       if (this.projectId) {
-        options.projectId = this.projectId
+        options.projectId = this.projectId;
       }
 
       if (this.tools) {
-        options.tools = this.tools
+        options.tools = this.tools;
       }
-      
+
       if (this.appearance) {
-        options.appearance = this.appearance
+        options.appearance = this.appearance;
       }
 
       if (this.locale) {
-        options.locale = this.locale
+        options.locale = this.locale;
       }
 
       /* global unlayer */
       this.editor = unlayer.createEditor({
         ...options,
         id: this.editorId,
-        displayMode: 'email',
+        displayMode,
         source: {
           name: pkg.name,
           version: pkg.version,
@@ -72,9 +81,9 @@ export default {
     },
     exportHtml(callback) {
       this.editor.exportHtml(callback);
-    }
+    },
   },
-}
+};
 </script>
 
 <style scoped>
