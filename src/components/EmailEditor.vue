@@ -66,6 +66,10 @@ export default {
       });
 
       this.$emit('load');
+
+      this.editor.addEventListener('editor:ready', () => {
+        this.$emit('ready');
+      });
     },
     loadDesign(design) {
       this.editor.loadDesign(design);
