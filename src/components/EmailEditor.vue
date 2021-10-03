@@ -65,7 +65,6 @@ export default {
         },
       });
 
-      // @deprecated
       this.$emit('load');
 
       this.editor.addEventListener('editor:ready', () => {

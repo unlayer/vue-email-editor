@@ -8,7 +8,7 @@
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
 
-      <EmailEditor ref="emailEditor" v-on:ready="editorReady" />
+      <EmailEditor ref="emailEditor" v-on:load="editorLoaded" v-on:ready="editorReady" />
     </div>
   </div>
 </template>
@@ -23,9 +23,14 @@ export default {
     EmailEditor
   },
   methods: {
+    // called when the editor is created
+    editorLoaded() {
+      console.log('editorLoaded');
+      this.$refs.emailEditor.editor.loadDesign(sample);
+    },
+    // called when the editor has finished loading
     editorReady() {
       console.log('editorReady');
-      this.$refs.emailEditor.editor.loadDesign(sample);
     },
     saveDesign() {
       this.$refs.emailEditor.editor.saveDesign(

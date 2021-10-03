@@ -42,7 +42,11 @@ Next, you'll need to import the Email Editor component to your app.
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
 
-      <EmailEditor ref="emailEditor" v-on:ready="editorReady" />
+      <EmailEditor
+        ref="emailEditor"
+        v-on:load="editorLoaded"
+        v-on:ready="editorReady"
+      />
     </div>
   </div>
 </template>
@@ -56,10 +60,15 @@ Next, you'll need to import the Email Editor component to your app.
       EmailEditor,
     },
     methods: {
-      editorReady() {
-        console.log('editorReady');
+      // called when the editor is created
+      editorLoaded() {
+        console.log('editorLoaded');
         // Pass the template JSON here
         // this.$refs.emailEditor.editor.loadDesign({});
+      },
+      // called when the editor has finished loading
+      editorReady() {
+        console.log('editorReady');
       },
       saveDesign() {
         this.$refs.emailEditor.editor.saveDesign((design) => {
@@ -121,6 +130,7 @@ Here's an example using the above properties...
         :tools="tools"
         :options="options"
         ref="emailEditor"
+        v-on:load="editorLoaded"
         v-on:ready="editorReady"
       />
     </div>
@@ -158,10 +168,15 @@ Here's an example using the above properties...
       };
     },
     methods: {
-      editorReady() {
-        console.log('editorReady');
+      // called when the editor is created
+      editorLoaded() {
+        console.log('editorLoaded');
         // Pass your template JSON here
         // this.$refs.emailEditor.editor.loadDesign({});
+      },
+      // called when the editor has finished loading
+      editorReady() {
+        console.log('editorReady');
       },
       saveDesign() {
         this.$refs.emailEditor.editor.saveDesign((design) => {
