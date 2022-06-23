@@ -1,26 +1,25 @@
-import Vue from 'vue/dist/vue.js'
-import VueRouter from 'vue-router'
+import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
-import Example from './views/Example.vue'
-import DesignList from './views/DesignList.vue'
-import DesignEdit from './views/DesignEdit.vue'
-
-Vue.config.productionTip = false
+import Example from './views/Example.vue';
+import DesignList from './views/DesignList.vue';
+import DesignEdit from './views/DesignEdit.vue';
 
 const routes = [
   { path: '/', component: Example },
   { path: '/dashboard', component: DesignList },
   { path: '/dashboard/new', component: DesignEdit },
   { path: '/dashboard/edit/:designId', component: DesignEdit },
-]
+];
 
-const router = new VueRouter({
-  mode: 'history',
-  routes
-})
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
-Vue.use(VueRouter)
+const app = createApp({});
 
-new Vue({
-  router
-}).$mount('#app')
+app.use(router);
+app.mount('#app');
+
+export default app;
