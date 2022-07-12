@@ -1,6 +1,6 @@
 {
   "name": "vue-email-editor",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "./dist/vue-email-editor.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,14 +10,18 @@
     "release": "npm run build-bundle && npm publish"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "core-js": "^3.8.3",
+    "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.5",
-    "@vue/cli-plugin-eslint": "^3.0.5",
-    "@vue/cli-service": "^3.0.5",
-    "vue-router": "^3.3.2",
-    "vue-template-compiler": "^2.5.17"
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "vue-router": "^4.0.16"
   },
   "files": [
     "dist/*",
@@ -32,22 +36,18 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
-    "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 8"
+    "not dead",
+    "not ie 11"
   ]
 }
