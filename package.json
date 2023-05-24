@@ -1,5 +1,5 @@
 {
-  "name": "vue-email-editor",
+  "name": "@john-it-com/vue-email-editor",
   "version": "1.0.0",
   "main": "./dist/vue-email-editor.common.js",
   "scripts": {
