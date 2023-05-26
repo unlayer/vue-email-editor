@@ -1,6 +1,6 @@
 {
-  "name": "@john-it-com/vue-email-editor",
-  "version": "1.0.0",
+  "name": "@john-it.com/vue-unlayer-editor",
+  "version": "1.0.4",
   "main": "./dist/vue-email-editor.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
