@@ -85,6 +85,9 @@ export default {
     exportHtml(callback) {
       this.editor.exportHtml(callback);
     },
+    setBodyValues(values) {
+      this.editor.setBodyValues(values);
+    },
   },
 };
 </script>
