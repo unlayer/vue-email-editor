@@ -19,6 +19,7 @@ export default {
     options: Object,
     projectId: Number,
     tools: Object,
+    blocks: Array,
     appearance: Object,
     locale: String,
     displayMode:{
@@ -49,6 +50,10 @@ export default {
 
       if (this.tools) {
         options.tools = this.tools;
+      }
+
+      if (this.blocks) {
+        options.blocks = this.blocks;
       }
 
       if (this.appearance) {
