@@ -13,41 +13,53 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { EmailEditor } from '../vue-email-editor'
 import sample from '../data/sample.json';
 
-export default {
+type EmailEditorInstance = InstanceType<typeof EmailEditor>;
+export default defineComponent({
   name: 'exampleView',
   components: {
     EmailEditor
   },
+  data() {
+    return {
+      emailEditor: null as EmailEditorInstance | null,
+    }
+  },
+  mounted() {
+    // Assign the ref with a type assertion
+    this.emailEditor = this.$refs.emailEditor as EmailEditorInstance;
+    // Now you can call methods on this.emailEditor
+    this.editorLoaded();
+  },
   methods: {
     // called when the editor is created
     editorLoaded() {
-      console.log('editorLoaded');
-      this.$refs.emailEditor.editor.loadDesign(sample);
+      this?.emailEditor?.editor?.loadDesign(sample)
     },
     // called when the editor has finished loading
     editorReady() {
       console.log('editorReady');
     },
     saveDesign() {
-      this.$refs.emailEditor.editor.saveDesign(
-        (design) => {
-          console.log('saveDesign', design);
+      this.emailEditor?.editor?.saveDesign(
+        () => {
+          console.log('saveDesign');
         }
       )
     },
     exportHtml() {
-      this.$refs.emailEditor.editor.exportHtml(
+      this?.emailEditor?.editor?.exportHtml(
         (data) => {
           console.log('exportHtml', data);
         }
       )
     }
   }
-}
+})
 </script>
 
 <style>
