@@ -1,10 +1,9 @@
 <template>
-  <div id="designEdit">
+  <div id="example">
     <div class="container">
       <div id="bar">
         <h1>Vue Email Editor (Demo)</h1>
 
-        <router-link to="/dashboard">Dashboard</router-link>
         <button v-on:click="saveDesign">Save Design</button>
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
@@ -14,39 +13,53 @@
   </div>
 </template>
 
-<script>
-import { EmailEditor } from '../components'
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { EmailEditor } from '../vue-email-editor'
+import sample from '../data/sample.json';
 
-export default {
-  name: 'designEdit',
+type EmailEditorInstance = InstanceType<typeof EmailEditor>;
+export default defineComponent({
+  name: 'exampleView',
   components: {
     EmailEditor
+  },
+  data() {
+    return {
+      emailEditor: null as EmailEditorInstance | null,
+    }
+  },
+  mounted() {
+    // Assign the ref with a type assertion
+    this.emailEditor = this.$refs.emailEditor as EmailEditorInstance;
+    // Now you can call methods on this.emailEditor
+    this.editorLoaded();
   },
   methods: {
     // called when the editor is created
     editorLoaded() {
-      console.log('editorLoaded');
+      this?.emailEditor?.editor?.loadDesign(sample)
     },
     // called when the editor has finished loading
     editorReady() {
       console.log('editorReady');
     },
     saveDesign() {
-      this.$refs.emailEditor.editor.saveDesign(
-        (design) => {
-          console.log('saveDesign', design);
+      this.emailEditor?.editor?.saveDesign(
+        () => {
+          console.log('saveDesign');
         }
       )
     },
     exportHtml() {
-      this.$refs.emailEditor.editor.exportHtml(
+      this?.emailEditor?.editor?.exportHtml(
         (data) => {
           console.log('exportHtml', data);
         }
       )
     }
   }
-}
+})
 </script>
 
 <style>
@@ -57,11 +70,11 @@ html, body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-#app, #designEdit {
+#app, #example {
   height: 100%;
 }
 
-#designEdit .container {
+#example .container {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -94,19 +107,5 @@ html, body {
   border: 0px;
   max-width: 150px;
   cursor: pointer;
-}
-
-#bar a {
-  flex: 1;
-  padding: 10px;
-  margin-left: 10px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-  border: 0px;
-  cursor: pointer;
-  text-align: right;
-  text-decoration: none;
-  line-height: 160%;
 }
 </style>

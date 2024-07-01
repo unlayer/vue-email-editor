@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { EmailEditor } from '../components'
+import { EmailEditor } from '../vue-email-editor'
 import sample from '../data/sample.json';
 
 export default {

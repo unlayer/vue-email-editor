@@ -6,28 +6,35 @@
   ></div>
 </template>
 
-<script>
-import { loadScript } from './loadScript';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import pkg from '../../package.json';
-
+import { loadScript } from './loadScript';
+import { EmailEditorProps } from './types';
 let lastEditorId = 0;
 
-export default {
+export default defineComponent({
   name: 'EmailEditor',
   props: {
-    editorId: String,
-    options: Object,
-    projectId: Number,
-    tools: Object,
-    appearance: Object,
-    locale: String,
+    appearance: Object as PropType<EmailEditorProps['appearance']>,
+    displayMode: String as PropType<EmailEditorProps['displayMode']>,
+    editorId: String as PropType<EmailEditorProps['editorId']>,
+    locale: String as PropType<EmailEditorProps['locale']>,
+    projectId: Number as PropType<EmailEditorProps['projectId']>,
+    tools: Object as PropType<EmailEditorProps['tools']>,
     minHeight: {
-      type: String,
+      type: String as PropType<EmailEditorProps['minHeight']>,
       default: '500px',
-    },
+    }
+  },
+  data() {
+    return {
+      editor: null as EmailEditorProps['editor'],
+      options: Object as EmailEditorProps['options'],
+    };
   },
   computed: {
-    id() {
+    id(): string | undefined {
       return this.editorId || `editor-${++lastEditorId}`;
     },
   },
@@ -58,7 +65,7 @@ export default {
       this.editor = unlayer.createEditor({
         ...options,
         id: this.id,
-        displayMode: 'email',
+        displayMode: this.displayMode || 'email',
         source: {
           name: pkg.name,
           version: pkg.version,
@@ -66,22 +73,22 @@ export default {
       });
 
       this.$emit('load');
-
+      
       this.editor.addEventListener('editor:ready', () => {
         this.$emit('ready');
       });
     },
-    loadDesign(design) {
-      this.editor.loadDesign(design);
+    loadDesign(design: any) {
+      this.editor?.loadDesign(design);
     },
-    saveDesign(callback) {
-      this.editor.saveDesign(callback);
+    saveDesign(callback: any) {
+      this.editor?.saveDesign(callback);
     },
-    exportHtml(callback) {
-      this.editor.exportHtml(callback);
+    exportHtml(callback: any) {
+      this.editor?.exportHtml(callback);
     },
   },
-};
+});
 </script>
 
 <style scoped>

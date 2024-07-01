@@ -1,15 +1,10 @@
-import { createApp } from 'vue';
+import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import Example from './views/Example.vue';
-import DesignList from './views/DesignList.vue';
-import DesignEdit from './views/DesignEdit.vue';
 
 const routes = [
   { path: '/', component: Example },
-  { path: '/dashboard', component: DesignList },
-  { path: '/dashboard/new', component: DesignEdit },
-  { path: '/dashboard/edit/:designId', component: DesignEdit },
 ];
 
 const router = createRouter({
