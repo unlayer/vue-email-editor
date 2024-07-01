@@ -1,15 +1,14 @@
 {
   "name": "vue-email-editor",
   "version": "2.1.0",
-  "main": "vue-email-editor.es",
-  "types": "vue-email-editor.d.ts",
+  "main": "dist/vue-email-editor.es",
+  "types": "dist/vue-email-editor.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-dts": "touch ./dist/vue-email-editor.d.ts && cat ./dist/**/*.d.ts > ./dist/vue-email-editor.d.ts",
-    "copy-types": "cp ./src/components/types.ts ./dist/components/types.d.ts",
-    "build-bundle": "vite build && cd ./src/components && vue-tsc --emitDeclarationOnly && npm run copy-types",
+    "adjust-types": "sed -i '' '1s/^/\\/\\/\\/ <reference types=\\\"unlayer-types\\/embed.d.ts\\\" \\/>\\n/' ./dist/components/types.d.ts",
+    "build-bundle": "vite build && cd ./src/components && vue-tsc --emitDeclarationOnly && npm run adjust-types",
     "release": "npm run build-bundle && npm publish"
   },
   "dependencies": {
