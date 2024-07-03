@@ -13,7 +13,7 @@
     "release": "npm run build-bundle && npm publish"
   },
   "dependencies": {
-    "unlayer-types": "^1.52.0",
+    "unlayer-types": "latest",
     "vue": "^3.2.13"
   },
   "devDependencies": {
