@@ -8,7 +8,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "adjust-types": "sed -i '' '1s/^/\\/\\/\\/ <reference types=\\\"unlayer-types\\/embed.d.ts\\\" \\/>\\n/' ./dist/components/types.d.ts",
-    "build-bundle": "vite build && cd ./src/components && vue-tsc --emitDeclarationOnly && npm run adjust-types",
+    "build-types": "vue-tsc --emitDeclarationOnly && npm run adjust-types",
+    "build-bundle": "vite build && cd ./src/components && npm run build-types",
     "release": "npm run build-bundle && npm publish"
   },
   "dependencies": {

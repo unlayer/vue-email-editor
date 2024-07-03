@@ -1,3 +1,4 @@
+// @ts-ignore
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import { createRouter, createWebHistory } from 'vue-router';
 

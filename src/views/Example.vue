@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { EmailEditor } from '../vue-email-editor'
+import { EmailEditor } from '../vue-email-editor';
 import sample from '../data/sample.json';
 
 type EmailEditorInstance = InstanceType<typeof EmailEditor>;
@@ -46,14 +46,14 @@ export default defineComponent({
     },
     saveDesign() {
       this.emailEditor?.editor?.saveDesign(
-        () => {
-          console.log('saveDesign');
+        (design: any) => {
+          console.log('saveDesign', design);
         }
       )
     },
     exportHtml() {
       this?.emailEditor?.editor?.exportHtml(
-        (data) => {
+        (data: any) => {
           console.log('exportHtml', data);
         }
       )

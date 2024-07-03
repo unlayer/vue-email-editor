@@ -7,36 +7,52 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import pkg from '../../package.json';
 import { loadScript } from './loadScript';
 import { EmailEditorProps } from './types';
+import { shallowRef } from 'vue';
 let lastEditorId = 0;
 
 export default defineComponent({
   name: 'EmailEditor',
   props: {
-    appearance: Object as PropType<EmailEditorProps['appearance']>,
-    displayMode: String as PropType<EmailEditorProps['displayMode']>,
-    editorId: String as PropType<EmailEditorProps['editorId']>,
-    locale: String as PropType<EmailEditorProps['locale']>,
-    projectId: Number as PropType<EmailEditorProps['projectId']>,
-    tools: Object as PropType<EmailEditorProps['tools']>,
+    editorId: String as () => EmailEditorProps['editorId'],
     minHeight: {
-      type: String as PropType<EmailEditorProps['minHeight']>,
+      type: String as () => EmailEditorProps['minHeight'],
       default: '500px',
-    }
-  },
-  data() {
-    return {
-      editor: null as EmailEditorProps['editor'],
-      options: Object as EmailEditorProps['options'],
-    };
+    },
+    options: Object as () => EmailEditorProps['options'],
+
+    /**
+     * @Deprecated Props: Use `options.appearance` instead
+     */
+    appearance: Object as () => EmailEditorProps['appearance'],
+     /**
+     * @Deprecated Props: Use `options.locale` instead
+     */
+    locale: String as () => EmailEditorProps['locale'],
+     /**
+     * @Deprecated Props: Use `options.projectId` instead
+     */
+    projectId: Number as () => EmailEditorProps['projectId'],
+     /**
+     * @Deprecated Props: Use `options.tools` instead
+     */
+    tools: Object as () => EmailEditorProps['tools'],
   },
   computed: {
     id(): string | undefined {
       return this.editorId || `editor-${++lastEditorId}`;
     },
+  },
+  setup() {
+    // shallowRef is used to avoid window.postMessage error
+    const editor = shallowRef(null as EmailEditorProps['editor']); // Creates a reactive reference
+
+    return {
+      editor, // Makes editor available to the template
+    };
   },
   mounted() {
     loadScript(this.loadEditor.bind(this));
@@ -44,14 +60,6 @@ export default defineComponent({
   methods: {
     loadEditor() {
       const options = this.options || {};
-
-      if (this.projectId) {
-        options.projectId = this.projectId;
-      }
-
-      if (this.tools) {
-        options.tools = this.tools;
-      }
 
       if (this.appearance) {
         options.appearance = this.appearance;
@@ -61,11 +69,18 @@ export default defineComponent({
         options.locale = this.locale;
       }
 
-      /* global unlayer */
+      if (this.projectId) {
+        options.projectId = this.projectId;
+      }
+
+      if (this.tools) {
+        options.tools = this.tools;
+      }
+
+      // @ts-ignore
       this.editor = unlayer.createEditor({
         ...options,
         id: this.id,
-        displayMode: this.displayMode || 'email',
         source: {
           name: pkg.name,
           version: pkg.version,
@@ -73,20 +88,32 @@ export default defineComponent({
       });
 
       this.$emit('load');
-      
+       // @ts-ignore
       this.editor.addEventListener('editor:ready', () => {
         this.$emit('ready');
       });
     },
-    loadDesign(design: any) {
-      this.editor?.loadDesign(design);
-    },
-    saveDesign(callback: any) {
-      this.editor?.saveDesign(callback);
-    },
-    exportHtml(callback: any) {
+    /**
+     * @deprecated This method will be removed in the next major release. Use `editor.exportHtml` instead.
+     */
+     exportHtml(callback: Parameters<EmailEditorProps['exportHtml']>[0]) {
+      // @ts-ignore
       this.editor?.exportHtml(callback);
     },
+    /**
+     * @deprecated This method will be removed in the next major release. Use `editor.loadDesign` instead.
+     */
+    loadDesign(design: Parameters<EmailEditorProps['loadDesign']>[0]) {
+       // @ts-ignore
+      this.editor?.loadDesign(design);
+    },
+     /**
+     * @deprecated This method will be removed in the next major release. Use `editor.saveDesign` instead.
+     */
+    saveDesign(callback: Parameters<EmailEditorProps['saveDesign']>[0]) {
+       // @ts-ignore
+      this.editor?.saveDesign(callback)
+    }
   },
 });
 </script>

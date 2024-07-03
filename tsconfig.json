@@ -16,11 +16,9 @@
     "skipLibCheck": true,
   },
   "include": [
+    "src/*",
     "src/components/*",
     "src/vue-email-editor.ts",
     "node_modules/unlayer-types/embed.d.ts"
   ],
-  "exclude": [
-    "src/views/*"
-  ]
 }
