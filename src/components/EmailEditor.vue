@@ -77,7 +77,6 @@ export default defineComponent({
         options.tools = this.tools;
       }
 
-      // @ts-ignore
       this.editor = unlayer.createEditor({
         ...options,
         id: this.id,
@@ -88,7 +87,6 @@ export default defineComponent({
       });
 
       this.$emit('load');
-       // @ts-ignore
       this.editor.addEventListener('editor:ready', () => {
         this.$emit('ready');
       });
@@ -97,21 +95,18 @@ export default defineComponent({
      * @deprecated This method will be removed in the next major release. Use `editor.exportHtml` instead.
      */
      exportHtml(callback: Parameters<EmailEditorProps['exportHtml']>[0]) {
-      // @ts-ignore
       this.editor?.exportHtml(callback);
     },
     /**
      * @deprecated This method will be removed in the next major release. Use `editor.loadDesign` instead.
      */
     loadDesign(design: Parameters<EmailEditorProps['loadDesign']>[0]) {
-       // @ts-ignore
       this.editor?.loadDesign(design);
     },
      /**
      * @deprecated This method will be removed in the next major release. Use `editor.saveDesign` instead.
      */
     saveDesign(callback: Parameters<EmailEditorProps['saveDesign']>[0]) {
-       // @ts-ignore
       this.editor?.saveDesign(callback)
     }
   },

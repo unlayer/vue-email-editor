@@ -34,3 +34,11 @@ export interface EmailEditorProps {
   /** @deprecated */
   saveDesign: Editor['saveDesign'];
 }
+
+declare global {
+  const unlayer: Unlayer;
+
+  interface Window {
+    __unlayer_lastEditorId: number;
+  }
+}
