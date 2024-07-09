@@ -1,8 +1,8 @@
-const scriptUrl = '//editor.unlayer.com/embed.js?2';
-const callbacks = [];
+const defaultScriptUrl = 'https://editor.unlayer.com/embed.js?2';
+const callbacks: Function[] = [];
 let loaded = false;
 
-const isScriptInjected = () => {
+const isScriptInjected = (scriptUrl: string) => {
   const scripts = document.querySelectorAll('script');
   let injected = false;
 
@@ -15,7 +15,7 @@ const isScriptInjected = () => {
   return injected;
 };
 
-const addCallback = (callback) => {
+const addCallback = (callback: Function) => {
   callbacks.push(callback);
 };
 
@@ -29,10 +29,13 @@ const runCallbacks = () => {
   }
 };
 
-export const loadScript = (callback) => {
+export const loadScript = (
+  callback: Function,
+  scriptUrl = defaultScriptUrl
+) => {
   addCallback(callback);
 
-  if (!isScriptInjected()) {
+  if (!isScriptInjected(scriptUrl)) {
     const embedScript = document.createElement('script');
     embedScript.setAttribute('src', scriptUrl);
     embedScript.onload = () => {
