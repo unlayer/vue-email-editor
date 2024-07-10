@@ -1,53 +1,35 @@
 {
   "name": "vue-email-editor",
-  "version": "2.0.0",
-  "main": "./dist/vue-email-editor.common.js",
+  "version": "2.1.0",
+  "main": "dist/vue-email-editor.es",
+  "types": "dist/vue-email-editor.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name vue-email-editor ./src/components/index.js",
     "lint": "vue-cli-service lint",
+    "adjust-types": "sed -i '' '1s/^/\\/\\/\\/ <reference types=\\\"unlayer-types\\/embed.d.ts\\\" \\/>\\n/' ./dist/components/types.d.ts",
+    "build-types": "vue-tsc --emitDeclarationOnly && npm run adjust-types",
+    "build-bundle": "vite build && cd ./src/components && npm run build-types",
     "release": "npm run build-bundle && npm publish"
   },
   "dependencies": {
-    "core-js": "^3.8.3",
+    "unlayer-types": "latest",
     "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@babel/types": "^7.24.7",
+    "@vitejs/plugin-vue": "^5.0.5",
     "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "vue-router": "^4.0.16"
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "vue-dts-gen": "^0.3.0",
+    "vue-loader": "^17.4.2",
+    "vue-router": "^4.4.0",
+    "vue-template-compiler": "^2.7.16",
+    "vue-tsc": "^2.0.22"
   },
   "files": [
-    "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
-  ],
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
+    "dist"
   ]
 }
