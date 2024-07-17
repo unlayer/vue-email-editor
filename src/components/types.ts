@@ -14,6 +14,7 @@ export interface EmailEditorProps {
   editorId?: string | undefined;
   minHeight?: number | string | undefined;
   options?: Config;
+  scriptUrl: string;
 
   // redundant props -- already available in options
   /** @deprecated */

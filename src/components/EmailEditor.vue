@@ -23,6 +23,7 @@ export default defineComponent({
       default: '500px',
     },
     options: Object as () => EmailEditorProps['options'],
+    scriptUrl: String as () => EmailEditorProps['scriptUrl'],
 
     /**
      * @Deprecated Props: Use `options.appearance` instead
@@ -55,7 +56,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    loadScript(this.loadEditor.bind(this));
+    loadScript(this.loadEditor.bind(this), this.scriptUrl);
   },
   methods: {
     loadEditor() {
