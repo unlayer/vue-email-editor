@@ -8,7 +8,7 @@
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
 
-      <EmailEditor ref="emailEditor" v-on:load="editorLoaded" v-on:ready="editorReady" />
+      <EmailEditor ref="emailEditor" v-on:load="editorLoaded" v-on:ready="editorReady" :options="options" />
     </div>
   </div>
 </template>
@@ -26,14 +26,26 @@ export default defineComponent({
   },
   data() {
     return {
-      emailEditor: null as EmailEditorInstance | null,
+    emailEditor: null as EmailEditorInstance | null,
+    options: {
+      projectId: 250012,
+      appearance: {
+        theme: 'modern_dark',
+        panels: {
+          tools: {
+            dock: 'left'
+          }
+        },
+        loader: {
+          url: 'https://cdn.tools.unlayer.com/image/placeholder.png?loadergif',
+        },
+      },
     }
-  },
+  }
+},
   mounted() {
     // Assign the ref with a type assertion
     this.emailEditor = this.$refs.emailEditor as EmailEditorInstance;
-    // Now you can call methods on this.emailEditor
-    this.editorLoaded();
   },
   methods: {
     // called when the editor is created

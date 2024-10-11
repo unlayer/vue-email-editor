@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, toRaw } from 'vue';
 import pkg from '../../package.json';
 import { loadScript } from './loadScript';
 import { EmailEditorProps } from './types';
-import { shallowRef } from 'vue';
+import { ref } from 'vue';
 let lastEditorId = 0;
 
 export default defineComponent({
@@ -22,7 +22,10 @@ export default defineComponent({
       type: String as () => EmailEditorProps['minHeight'],
       default: '500px',
     },
-    options: Object as () => EmailEditorProps['options'],
+    options: {
+      type: Object as () => EmailEditorProps['options'],
+      default: () => ({}),
+    },
     scriptUrl: String as () => EmailEditorProps['scriptUrl'],
 
     /**
@@ -49,7 +52,7 @@ export default defineComponent({
   },
   setup() {
     // shallowRef is used to avoid window.postMessage error
-    const editor = shallowRef(null as EmailEditorProps['editor']); // Creates a reactive reference
+    const editor = ref<EmailEditorProps['editor'] | null>(null); // Creates a reactive reference
 
     return {
       editor, // Makes editor available to the template
@@ -60,10 +63,12 @@ export default defineComponent({
   },
   methods: {
     loadEditor() {
-      const options = this.options || {};
+      const options = toRaw(this.options) || {};
+      const appearance = toRaw(this.appearance) || null;
+      const tools = toRaw(this.tools) || null;
 
-      if (this.appearance) {
-        options.appearance = this.appearance;
+      if (appearance) {
+        options.appearance = appearance;
       }
 
       if (this.locale) {
@@ -74,8 +79,8 @@ export default defineComponent({
         options.projectId = this.projectId;
       }
 
-      if (this.tools) {
-        options.tools = this.tools;
+      if (tools) {
+        options.tools = tools;
       }
 
       this.editor = unlayer.createEditor({
