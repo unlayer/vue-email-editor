@@ -8,7 +8,7 @@
         <button v-on:click="exportHtml">Export HTML</button>
       </div>
 
-      <EmailEditor ref="emailEditor" v-on:load="editorLoaded" v-on:ready="editorReady" />
+      <EmailEditor ref="emailEditor" v-on:load="editorLoaded" v-on:ready="editorReady" :options="options" />
     </div>
   </div>
 </template>
@@ -27,13 +27,17 @@ export default defineComponent({
   data() {
     return {
       emailEditor: null as EmailEditorInstance | null,
+      options: {
+        appearance: {
+          theme: 'modern_light',
+        },
+        version: 'latest',
+      }
     }
   },
   mounted() {
     // Assign the ref with a type assertion
     this.emailEditor = this.$refs.emailEditor as EmailEditorInstance;
-    // Now you can call methods on this.emailEditor
-    this.editorLoaded();
   },
   methods: {
     // called when the editor is created
