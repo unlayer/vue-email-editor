@@ -28,18 +28,10 @@ export default defineComponent({
     return {
     emailEditor: null as EmailEditorInstance | null,
     options: {
-      projectId: 250012,
       appearance: {
-        theme: 'modern_dark',
-        panels: {
-          tools: {
-            dock: 'left'
-          }
-        },
-        loader: {
-          url: 'https://cdn.tools.unlayer.com/image/placeholder.png?loadergif',
-        },
+        theme: 'modern_light',
       },
+      version: 'latest',
     }
   }
 },
