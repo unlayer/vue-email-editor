@@ -34,7 +34,7 @@ export default defineComponent({
         version: 'latest',
       }
     }
-},
+  },
   mounted() {
     // Assign the ref with a type assertion
     this.emailEditor = this.$refs.emailEditor as EmailEditorInstance;
