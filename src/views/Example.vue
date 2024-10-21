@@ -26,14 +26,14 @@ export default defineComponent({
   },
   data() {
     return {
-    emailEditor: null as EmailEditorInstance | null,
-    options: {
-      appearance: {
-        theme: 'modern_light',
-      },
-      version: 'latest',
+      emailEditor: null as EmailEditorInstance | null,
+      options: {
+        appearance: {
+          theme: 'modern_light',
+        },
+        version: 'latest',
+      }
     }
-  }
 },
   mounted() {
     // Assign the ref with a type assertion
