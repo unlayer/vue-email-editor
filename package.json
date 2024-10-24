@@ -1,6 +1,6 @@
 {
   "name": "vue-email-editor",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "main": "dist/vue-email-editor.es",
   "types": "dist/vue-email-editor.d.ts",
   "scripts": {
