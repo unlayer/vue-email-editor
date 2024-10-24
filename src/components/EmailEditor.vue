@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRaw } from 'vue';
+import { defineComponent, shallowRef, toRaw } from 'vue';
 import pkg from '../../package.json';
 import { loadScript } from './loadScript';
 import { EmailEditorProps } from './types';
@@ -52,7 +52,7 @@ export default defineComponent({
   },
   setup() {
     // shallowRef is used to avoid window.postMessage error
-    const editor = ref<EmailEditorProps['editor'] | null>(null); // Creates a reactive reference
+    const editor = shallowRef<EmailEditorProps['editor'] | null>(null); // Creates a reactive reference
 
     return {
       editor, // Makes editor available to the template
@@ -64,11 +64,9 @@ export default defineComponent({
   methods: {
     loadEditor() {
       const options = toRaw(this.options) || {};
-      const appearance = toRaw(this.appearance) || null;
-      const tools = toRaw(this.tools) || null;
 
-      if (appearance) {
-        options.appearance = appearance;
+      if (this.appearance) {
+        options.appearance = this.appearance;
       }
 
       if (this.locale) {
@@ -79,8 +77,8 @@ export default defineComponent({
         options.projectId = this.projectId;
       }
 
-      if (tools) {
-        options.tools = tools;
+      if (this.tools) {
+        options.tools = this.tools;
       }
 
       this.editor = unlayer.createEditor({
