@@ -1,6 +1,6 @@
 {
   "name": "vue-email-editor",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "main": "dist/vue-email-editor.es",
   "types": "dist/vue-email-editor.d.ts",
   "scripts": {
@@ -14,8 +14,7 @@
   },
   "dependencies": {
     "unlayer-types": "latest",
-    "vue": "^3.2.13",
-    "vue-email-editor": "^2.1.4"
+    "vue": "^3.2.13"
   },
   "devDependencies": {
     "@babel/types": "^7.24.7",
