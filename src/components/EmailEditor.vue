@@ -51,8 +51,25 @@ export default defineComponent({
     },
   },
   setup() {
-    // shallowRef is used to avoid window.postMessage error
-    const editor = shallowRef<EmailEditorProps['editor'] | null>(null); // Creates a reactive reference
+    const editor = shallowRef<EmailEditorProps['editor'] | null>(null);
+
+    // Add a wrapper for the editor to handle serialization
+    const createSerializedEditor = (originalEditor: any) => {
+      if (!originalEditor) return null;
+      
+      return {
+        ...originalEditor,
+        registerCallback: (event: string, callback: Function) => {
+          originalEditor.registerCallback(event, (data: any, done: Function) => {
+            callback(data, (result: any) => {
+              // Serialize the result before passing to postMessage
+              const safeResult = JSON.parse(JSON.stringify(result));
+              done(safeResult);
+            });
+          });
+        }
+      };
+    };
 
     return {
       editor, // Makes editor available to the template
@@ -81,7 +98,7 @@ export default defineComponent({
         options.tools = this.tools;
       }
 
-      this.editor = unlayer.createEditor({
+      const rawEditor = unlayer.createEditor({
         ...options,
         id: this.id,
         source: {
@@ -90,8 +107,11 @@ export default defineComponent({
         },
       });
 
+      // Wrap the editor with serialization handling
+      this.editor = this.createSerializedEditor(rawEditor);
+
       this.$emit('load');
-      this.editor.addEventListener('editor:ready', () => {
+      this.editor?.addEventListener('editor:ready', () => {
         this.$emit('ready');
       });
     },

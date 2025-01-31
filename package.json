@@ -14,13 +14,14 @@
   },
   "dependencies": {
     "unlayer-types": "latest",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-email-editor": "^2.1.4"
   },
   "devDependencies": {
     "@babel/types": "^7.24.7",
     "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/cli-service": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
     "vue-dts-gen": "^0.3.0",
