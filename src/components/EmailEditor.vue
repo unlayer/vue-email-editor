@@ -53,7 +53,6 @@ export default defineComponent({
   setup() {
     const editor = shallowRef<EmailEditorProps['editor'] | null>(null);
 
-    // Add a wrapper for the editor to handle serialization
     const createSerializedEditor = (originalEditor: any) => {
       if (!originalEditor) return null;
       
@@ -62,9 +61,8 @@ export default defineComponent({
         registerCallback: (event: string, callback: Function) => {
           originalEditor.registerCallback(event, (data: any, done: Function) => {
             callback(data, (result: any) => {
-              // Serialize the result before passing to postMessage
-              const safeResult = JSON.parse(JSON.stringify(result));
-              done(safeResult);
+              const rawResult = toRaw(result);
+              done(rawResult);
             });
           });
         }
@@ -72,7 +70,8 @@ export default defineComponent({
     };
 
     return {
-      editor, // Makes editor available to the template
+      editor,
+      createSerializedEditor,
     };
   },
   mounted() {
