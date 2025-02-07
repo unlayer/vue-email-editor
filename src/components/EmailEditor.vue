@@ -11,7 +11,6 @@ import { defineComponent, shallowRef, toRaw } from 'vue';
 import pkg from '../../package.json';
 import { loadScript } from './loadScript';
 import { EmailEditorProps } from './types';
-import { ref } from 'vue';
 let lastEditorId = 0;
 
 export default defineComponent({
