@@ -81,7 +81,7 @@ export default defineComponent({
       const options = toRaw(this.options) || {};
 
       if (this.appearance) {
-        options.appearance = this.appearance;
+        options.appearance = toRaw(this.appearance);
       }
 
       if (this.locale) {
@@ -93,7 +93,7 @@ export default defineComponent({
       }
 
       if (this.tools) {
-        options.tools = this.tools;
+        options.tools = toRaw(this.tools);
       }
 
       const rawEditor = unlayer.createEditor({
