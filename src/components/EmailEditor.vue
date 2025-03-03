@@ -7,11 +7,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRaw } from 'vue';
+import { defineComponent, shallowRef, toRaw } from 'vue';
 import pkg from '../../package.json';
 import { loadScript } from './loadScript';
 import { EmailEditorProps } from './types';
-import { ref } from 'vue';
 let lastEditorId = 0;
 
 export default defineComponent({
@@ -51,11 +50,27 @@ export default defineComponent({
     },
   },
   setup() {
-    // shallowRef is used to avoid window.postMessage error
-    const editor = ref<EmailEditorProps['editor'] | null>(null); // Creates a reactive reference
+    const editor = shallowRef<EmailEditorProps['editor'] | null>(null);
+
+    const createSerializedEditor = (originalEditor: any) => {
+      if (!originalEditor) return null;
+      
+      return {
+        ...originalEditor,
+        registerCallback: (event: string, callback: Function) => {
+          originalEditor.registerCallback(event, (data: any, done: Function) => {
+            callback(data, (result: any) => {
+              const rawResult = toRaw(result);
+              done(rawResult);
+            });
+          });
+        }
+      };
+    };
 
     return {
-      editor, // Makes editor available to the template
+      editor,
+      createSerializedEditor,
     };
   },
   mounted() {
@@ -64,11 +79,9 @@ export default defineComponent({
   methods: {
     loadEditor() {
       const options = toRaw(this.options) || {};
-      const appearance = toRaw(this.appearance) || null;
-      const tools = toRaw(this.tools) || null;
 
-      if (appearance) {
-        options.appearance = appearance;
+      if (this.appearance) {
+        options.appearance = toRaw(this.appearance);
       }
 
       if (this.locale) {
@@ -79,11 +92,11 @@ export default defineComponent({
         options.projectId = this.projectId;
       }
 
-      if (tools) {
-        options.tools = tools;
+      if (this.tools) {
+        options.tools = toRaw(this.tools);
       }
 
-      this.editor = unlayer.createEditor({
+      const rawEditor = unlayer.createEditor({
         ...options,
         id: this.id,
         source: {
@@ -92,8 +105,11 @@ export default defineComponent({
         },
       });
 
+      // Wrap the editor with serialization handling
+      this.editor = this.createSerializedEditor(rawEditor);
+
       this.$emit('load');
-      this.editor.addEventListener('editor:ready', () => {
+      this.editor?.addEventListener('editor:ready', () => {
         this.$emit('ready');
       });
     },

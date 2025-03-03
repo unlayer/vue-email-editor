@@ -1,6 +1,6 @@
 {
   "name": "vue-email-editor",
-  "version": "2.1.2",
+  "version": "2.1.5",
   "main": "dist/vue-email-editor.es",
   "types": "dist/vue-email-editor.d.ts",
   "scripts": {
@@ -19,8 +19,8 @@
   "devDependencies": {
     "@babel/types": "^7.24.7",
     "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/cli-service": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
     "vue-dts-gen": "^0.3.0",
