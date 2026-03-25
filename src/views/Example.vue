@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import type { JSONTemplate } from '@unlayer/types';
 import { EmailEditor } from '../vue-email-editor';
 import sample from '../data/sample.json';
 
@@ -42,7 +43,7 @@ export default defineComponent({
   methods: {
     // called when the editor is created
     editorLoaded() {
-      this?.emailEditor?.editor?.loadDesign(sample as any)
+      this?.emailEditor?.editor?.loadDesign(sample as unknown as JSONTemplate)
     },
     // called when the editor has finished loading
     editorReady() {
