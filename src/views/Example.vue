@@ -29,7 +29,7 @@ export default defineComponent({
       emailEditor: null as EmailEditorInstance | null,
       options: {
         appearance: {
-          theme: 'modern_light',
+          theme: 'modern_light' as const,
         },
         version: 'latest',
       }
@@ -42,7 +42,7 @@ export default defineComponent({
   methods: {
     // called when the editor is created
     editorLoaded() {
-      this?.emailEditor?.editor?.loadDesign(sample)
+      this?.emailEditor?.editor?.loadDesign(sample as any)
     },
     // called when the editor has finished loading
     editorReady() {

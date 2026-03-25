@@ -1,19 +1,27 @@
 {
   "name": "vue-email-editor",
-  "version": "2.1.5",
-  "main": "dist/vue-email-editor.es",
+  "version": "2.2.0",
+  "main": "dist/vue-email-editor.es.js",
   "types": "dist/vue-email-editor.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-email-editor.es.js",
+      "require": "./dist/vue-email-editor.umd.js",
+      "types": "./dist/vue-email-editor.d.ts"
+    }
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "adjust-types": "sed -i '' '1s/^/\\/\\/\\/ <reference types=\\\"unlayer-types\\/embed.d.ts\\\" \\/>\\n/' ./dist/components/types.d.ts",
-    "build-types": "vue-tsc --emitDeclarationOnly && npm run adjust-types",
+    "build-types": "vue-tsc --emitDeclarationOnly",
     "build-bundle": "vite build && cd ./src/components && npm run build-types",
     "release": "npm run build-bundle && npm publish"
   },
   "dependencies": {
-    "unlayer-types": "latest",
+    "@unlayer/types": "^1.394.0"
+  },
+  "peerDependencies": {
     "vue": "^3.2.13"
   },
   "devDependencies": {
@@ -23,6 +31,7 @@
     "@vue/cli-service": "~5.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
+    "vue": "^3.2.13",
     "vue-dts-gen": "^0.3.0",
     "vue-loader": "^17.4.2",
     "vue-router": "^4.4.0",
