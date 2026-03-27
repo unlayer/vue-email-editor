@@ -18,7 +18,6 @@
   "include": [
     "src/*",
     "src/components/*",
-    "src/vue-email-editor.ts",
-    "node_modules/unlayer-types/embed.d.ts"
+    "src/vue-email-editor.ts"
   ],
 }

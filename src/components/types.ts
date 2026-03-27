@@ -1,19 +1,20 @@
-// ignore next line
-/// <reference types="unlayer-types/embed.d.ts" />
+import type {
+  UnlayerEmbed,
+  UnlayerEditor,
+  UnlayerOptions,
+  AppearanceConfig,
+  DisplayMode,
+  ToolsConfig,
+} from '@unlayer/types';
 
-import Embed from 'embed/index';
-import { Editor as EditorClass } from 'embed/Editor';
-import { Config } from "embed/Config";
-import { AppearanceConfig, DisplayMode, ToolsConfig } from 'state/types/types';
-
-export type Unlayer = typeof Embed;
-export type Editor = InstanceType<typeof EditorClass>;
+export type Unlayer = UnlayerEmbed;
+export type Editor = UnlayerEditor;
 
 export interface EmailEditorProps {
   editor: Editor | null;
   editorId?: string | undefined;
   minHeight?: number | string | undefined;
-  options?: Config;
+  options?: UnlayerOptions;
   scriptUrl: string;
 
   // redundant props -- already available in options
