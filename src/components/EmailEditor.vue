@@ -57,6 +57,19 @@ export default defineComponent({
       
       return {
         ...originalEditor,
+        loadDesign: (design: Parameters<EmailEditorProps['loadDesign']>[0]) => {
+          if (
+            design !== null &&
+            typeof design === 'object' &&
+            !Array.isArray(design) &&
+            Object.keys(design).length === 0
+          ) {
+            originalEditor.loadBlank();
+            return;
+          }
+
+          return originalEditor.loadDesign(design);
+        },
         registerCallback: (event: string, callback: Function) => {
           originalEditor.registerCallback(event, (data: any, done: Function) => {
             callback(data, (result: any) => {
