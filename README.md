@@ -63,8 +63,8 @@ Next, you'll need to import the Email Editor component to your app.
       // called when the editor is created
       editorLoaded() {
         console.log('editorLoaded');
-        // Pass the template JSON here
-        // this.$refs.emailEditor.editor.loadDesign({});
+        // Load a blank editor
+        // this.$refs.emailEditor.editor.loadBlank();
       },
       // called when the editor has finished loading
       editorReady() {
@@ -171,8 +171,8 @@ Here's an example using the above properties...
       // called when the editor is created
       editorLoaded() {
         console.log('editorLoaded');
-        // Pass your template JSON here
-        // this.$refs.emailEditor.editor.loadDesign({});
+        // Load a blank editor
+        // this.$refs.emailEditor.editor.loadBlank();
       },
       // called when the editor has finished loading
       editorReady() {
